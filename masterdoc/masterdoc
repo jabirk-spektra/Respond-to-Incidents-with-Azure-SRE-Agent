@@ -1,1 +1,21 @@
-
+[
+  {
+    "Name": "Lab: Respond to Incidents with Azure SRE Agent",
+    "Language": "English",
+    "BaseURL": "https://github.com/jabirk-spektra/Respond-to-Incidents-with-Azure-SRE-Agent",
+    "Files": [
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/jabirk-spektra/Respond-to-Incidents-with-Azure-SRE-Agent/refs/heads/main/Getting-Started/GettingStarted.md",
+        "Order": 1
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/jabirk-spektra/Respond-to-Incidents-with-Azure-SRE-Agent/refs/heads/main/Exercise%2001%3A%20Create%20and%20Deploy%20Your%20Azure%20SRE%20Agent/Exercise-01.md",
+        "Order": 2
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/jabirk-spektra/Respond-to-Incidents-with-Azure-SRE-Agent/refs/heads/main/Exercise%2002%3A%20Add%20operational%20knowledge%20and%20verify%20grounded%20responses/Exercise-02.md",
+        "Order": 3
+      }
+    ]
+  }
+]
