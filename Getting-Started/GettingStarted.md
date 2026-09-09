@@ -65,45 +65,41 @@ CloudLabs deploys a disposable lab environment that contains a Windows Lab VM, a
 - **Azure SRE Agent**: Provides the agent experience for resource inspection, operational chat, and knowledge-grounded incident response. It may be pre-created by the deployment or created manually in Exercise 1.
 
 ## 🚀 Getting Started with the Lab
+
 Welcome to your Respond to Incidents with Azure SRE Agent lab! We've prepared a seamless environment for you to explore and learn about Azure services. Let's begin by making the most of this experience:
 
 ### Accessing Your Lab Environment
+
 Once you are ready to dive in, your virtual machine and this guide will be right at your fingertips within your web browser.
 
-### Lab Guide Zoom In/Zoom Out
-To adjust the zoom level for the environment page, click the **A↕: 100%** icon located next to the timer in the lab environment.
+![](./../media/Accessing-Your-Lab-Environment.png)
 
-### Manage Your Virtual Machine
-Your virtual machine is your workhorse throughout the lab. The lab guide is your roadmap to success.
+### Lab Guide Zoom In/Zoom Out
+To adjust the zoom level for the environment page, click the **A↕** icon located next to the timer in the lab environment.
+
+![](./../media/gs-01.png)
+
+## Resize the Virtual Machine View
+
+Use the **slider (three vertical dots)** located between the **Virtual Machine** and the **Lab Guide** panes to adjust the display size, allowing you to customize the layout based on your preference.
+
+![](./../media/zoom-n.png)
 
 ### Exploring Your Lab Resources
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
 
+![](./../media/gs-04.png)
+
 ### Utilizing the Split Window Feature
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
 
+![](./../media/gs-05.png)
+
 ### Managing Your Virtual Machine
+
 Feel free to start, stop, or restart your virtual machine as needed from the **Resources** tab. Your experience is in your hands!
 
-### Validating Your Lab Tasks
-Once you complete a task, you will see a **Validate** button integrated within the lab guide where a checkpoint applies. Click this button to ensure the lab instructions have been followed correctly and the tasks have been completed successfully.
-
-- If the validation is successful, a **Success** status is displayed, and you can proceed to the next task.
-- If the validation fails, select **See why?** to view details about what went wrong, address the issue, then select **Retry Validation**.
-- If you continue to face issues, carefully review the steps in the lab guide before attempting validation again.
-
-## ☁️ Let's Get Started with Azure Portal
-1. Open a browser on the Lab VM.
-2. Go to <https://portal.azure.com>.
-3. You will see the **Sign in to Microsoft Azure** tab. Enter your credentials:
-
-   - Username: <inject key="AzureAdUserEmail"></inject>
-   - Password: <inject key="AzureAdUserPassword"></inject>
-
-4. If prompted to stay signed in, select **Yes**.
-5. If a **Welcome to Microsoft Azure** pop-up window appears, select **Cancel** to skip the tour.
-6. Confirm that you are working in subscription <inject key="SubscriptionID"></inject> and tenant <inject key="TenantID"></inject>.
-7. Your lab deployment identifier is **Lab deployment <inject key="DeploymentID" enableCopy="false"/>**. Use this value to recognize lab-created resource names when they include the deployment suffix.
+![](./../media/gs-02.png)
 
 ## 🆘 Support Contact
 The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance anytime. We offer dedicated support channels tailored specifically for learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
