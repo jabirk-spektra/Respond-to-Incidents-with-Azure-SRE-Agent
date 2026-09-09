@@ -54,7 +54,7 @@
     }
   },
   "variables": {
-    "scripturl": "https://experienceazure.blob.core.windows.net/templates/avm-terraform/psscript-01.ps1",
+    "scripturl": "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1",
     "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
     "vnetName": "[concat('vnet-', parameters('DeploymentID'))]",
     "subnetName": "default",
@@ -230,7 +230,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File psscript-01.ps1 -AzureUserName \"', parameters('azureUserName'), '\" -AzurePassword \"', parameters('azurePassword'), '\" -AzureTenantID \"', subscription().tenantId, '\" -AzureSubscriptionID \"', subscription().subscriptionId, '\" -ODLID \"', parameters('ODLID'), '\" -DeploymentID \"', parameters('DeploymentID'), '\" -vmAdminUsername \"', parameters('adminUsername'), '\" -vmAdminPassword \"', parameters('adminPassword'), '\" -trainerUserName \"', parameters('trainerUserName'), '\" -trainerUserPassword \"', parameters('trainerUserPassword'), '\"')]"
+          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -Command \"(New-Object System.Net.ServicePointManager).SecurityProtocol = 3072; $scriptUri = ', variables('scripturl'), '; $scriptFile = (Split-Path -Leaf $scriptUri); Write-Host \\\"Downloading script...\\\"; (New-Object Net.WebClient).DownloadFile($scriptUri, $scriptFile); Write-Host \\\"Executing script...\\\"; & .\\', $scriptFile, ' -AzureUserName \\\\\"', parameters('azureUserName'), '\\\\\" -AzurePassword \\\\\"', parameters('azurePassword'), '\\\\\" -AzureTenantID \\\\\"', subscription().tenantId, '\\\\\" -AzureSubscriptionID \\\\\"', subscription().subscriptionId, '\\\\\" -ODLID \\\\\"', parameters('ODLID'), '\\\\\" -InstallCloudLabsShadow \\\\\"', parameters('ODLID'), '\\\\\" -DeploymentID \\\\\"', parameters('DeploymentID'), '\\\\\" -vmAdminUsername \\\\\"', parameters('adminUsername'), '\\\\\" -vmAdminPassword \\\\\"', parameters('adminPassword'), '\\\\\" -trainerUserName \\\\\"', parameters('trainerUserName'), '\\\\\" -trainerUserPassword \\\\\"', parameters('trainerUserPassword'), '\\\\\"\"')]"
         }
       }
     },
