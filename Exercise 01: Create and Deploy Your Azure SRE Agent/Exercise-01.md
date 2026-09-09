@@ -121,8 +121,7 @@ In this task, you will confirm that the account and subscription can access the 
 
 8. Review the output:
 
-   - If you see **agents** and **2025-05-01-preview**, continue with the exercise.
-   - If the output is empty or does not include **agents**, continue with the portal fallback in Task 3. The ARM deployment can still provide the web app, telemetry, and runbook for the lab.
+   - If you see **agents** and **2025-05-01-preview**, you may proceed with the exercise.
 
 ## Task 3: Open the ARM-precreated agent or create an agent manually
 In this task, you will open the Azure SRE Agent portal and either verify the existing agent or create a new one. The agent creation wizard may show model provider options that vary by subscription and region. Select the default available provider unless your instructor gives a different value.
