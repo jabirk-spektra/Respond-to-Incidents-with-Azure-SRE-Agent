@@ -398,69 +398,50 @@
     }
   ],
   "outputs": {
-    "vmServerDnsName": {
+
+    "DeploymentID": {
       "type": "string",
-      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName')), '2023-11-01').dnsSettings.fqdn]"
+      "value": "[parameters('DeploymentID')]"
     },
-    "vmServerUsername": {
+
+    "LabVM Admin Username": {
       "type": "string",
       "value": "[parameters('adminUsername')]"
     },
-    "vmServerPassword": {
+
+    "LabVM Admin Password": {
       "type": "string",
       "value": "[parameters('adminPassword')]"
     },
-    "trainerUserName": {
+
+    "LabVM DNS Name": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn]"
+    },
+
+    "Trainer User Name": {
       "type": "string",
       "value": "[parameters('trainerUserName')]"
     },
-    "trainerUserPassword": {
+
+    "Trainer Password": {
       "type": "string",
       "value": "[parameters('trainerUserPassword')]"
     },
-    "labVmName": {
+
+    "Region": {
       "type": "string",
-      "value": "[variables('LabVMName')]"
+      "value": "[variables('location')]"
     },
-    "workloadResourceGroupName": {
+
+    "Foundry Resource Name": {
       "type": "string",
-      "value": "[resourceGroup().name]"
+      "value": "[variables('foundryHubName')]"
     },
-    "webAppName": {
+
+    "Foundry Project Name": {
       "type": "string",
-      "value": "[variables('webAppName')]"
-    },
-    "webAppUrl": {
-      "type": "string",
-      "value": "[concat('https://', reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2023-12-01').defaultHostName)]"
-    },
-    "appInsightsName": {
-      "type": "string",
-      "value": "[variables('appInsightsName')]"
-    },
-    "logAnalyticsWorkspaceName": {
-      "type": "string",
-      "value": "[variables('logAnalyticsWorkspaceName')]"
-    },
-    "sreAgentName": {
-      "type": "string",
-      "value": "[variables('sreAgentName')]"
-    },
-    "sreAgentResourceId": {
-      "type": "string",
-      "value": "[resourceId('Microsoft.App/agents', variables('sreAgentName'))]"
-    },
-    "sreAgentPortalUrl": {
-      "type": "string",
-      "value": "https://sre.azure.com"
-    },
-    "sreAgentArmDeploymentEnabled": {
-      "type": "string",
-      "value": "[string(variables('deploySreAgent'))]"
-    },
-    "runbookPath": {
-      "type": "string",
-      "value": "[variables('runbookPath')]"
+      "value": "[variables('foundryProjectName')]"
     }
   }
 }
