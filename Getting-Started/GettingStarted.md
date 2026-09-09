@@ -88,7 +88,7 @@ Use the **slider (three vertical dots)** located between the **Virtual Machine**
 ## Exploring Your Lab Resources
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
 
-![](./../media/gs-04.png)
+![](./../media/env-n-01.png)
 
 ## Utilizing the Split Window Feature
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
