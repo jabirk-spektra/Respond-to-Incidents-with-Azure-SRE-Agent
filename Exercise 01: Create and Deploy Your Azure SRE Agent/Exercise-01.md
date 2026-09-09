@@ -38,8 +38,6 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 
       ![](./../media/ria-03.png)
    
-3. If prompted, complete any first-run Azure portal prompts by accepting defaults or selecting **Skip**.
-
 4. In the Azure portal search bar, search for **Resource groups (1)**, and then select **Resource groups (2)**.
 
    ![](./../media/ria-04.png)
@@ -78,15 +76,7 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 
     ![](./../media/ria-12.png)
 
-    >**Note**:Keep the browser tabs for the lab resource group, the web app, Application Insights, and Log Analytics open. You will use these names when you verify the SRE Agent response later in the exercise.
-
-Congratulations on completing the task! Now, it's time to validate it. Here are the steps:
-
-- Hit the **Validate** button for the corresponding task. If you receive a success message, you can proceed to the next task.
-- If not, carefully read the error message and retry the step, following the instructions in the exercise guide.
-- If you need any assistance, don't hesitate to get in touch with us at cloudlabs-support@spektrasystems.com. We are available 24/7 to assist you.
-
-<validation step="Validate workload and telemetry readiness"/>
+    >**Note**: Keep the browser tabs for the lab resource group, the web app, Application Insights, and Log Analytics open. You will use these names when you verify the SRE Agent response later in the exercise.
 
 ## Task 2: Confirm Azure SRE Agent prerequisites and preview availability
 In this task, you will confirm that the account and subscription can access the Azure SRE Agent preview resource type. Azure SRE Agent uses the ARM resource type **Microsoft.App/agents** and the preview API version **2025-05-01-preview**. The portal flow is the primary path for this lab because the preview schema and provider availability can vary by tenant.
