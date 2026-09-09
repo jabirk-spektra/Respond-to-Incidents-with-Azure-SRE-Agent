@@ -217,4 +217,6 @@ In this task, you will use the Azure SRE Agent chat experience to verify that th
 ## 🧾 Summary
 In this exercise, you confirmed that the lab workload and telemetry resources are available, verified Microsoft.App/agents preview availability, opened or created an Azure SRE Agent in a supported region, connected telemetry where available, and granted the agent resource-group-scoped access in Reader mode. You also verified the setup by asking the agent what Azure resources it can see in the lab resource group.
 
-You have successfully completed the exercise. Click **Next >>** to continue to Exercise 2.
+Click **Next** from the lower right corner to move on to the next page.
+
+![](./../media/sre-13.png)
