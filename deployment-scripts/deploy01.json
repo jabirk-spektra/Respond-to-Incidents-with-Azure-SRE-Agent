@@ -398,6 +398,34 @@
     }
   ],
   "outputs": {
+    "DeploymentID": {
+      "type": "string",
+      "value": "[parameters('DeploymentID')]"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[variables('location')]"
+    },
+    "LabVM DNS Name": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))).dnsSettings.fqdn]"
+    },
+    "LabVM Admin Username": {
+      "type": "string",
+      "value": "[parameters('adminUsername')]"
+    },
+    "LabVM Admin Password": {
+      "type": "string",
+      "value": "[parameters('adminPassword')]"
+    },
+    "Trainer User Name": {
+      "type": "string",
+      "value": "[parameters('trainerUserName')]"
+    },
+    "Trainer Password": {
+      "type": "string",
+      "value": "[parameters('trainerUserPassword')]"
+    },
     "vmServerDnsName": {
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName')), '2023-11-01').dnsSettings.fqdn]"
