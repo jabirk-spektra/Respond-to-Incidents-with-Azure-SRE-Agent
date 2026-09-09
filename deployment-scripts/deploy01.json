@@ -1,4 +1,3 @@
-```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -39,6 +38,7 @@
     "enableCloudLabsEmbeddedShadow": "[concat(' -vmAdminUsername \"', parameters('adminUsername'), '\" -vmAdminPassword \"', parameters('adminPassword'), '\" -trainerUserName \"', parameters('trainerUserName'), '\" -trainerUserPassword \"', parameters('trainerUserPassword'), '\"')]",
 
     "scripturl": "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1",
+
     "commonFunctionsUrl": "https://experienceazure.blob.core.windows.net/templates/cloudlabs-common/cloudlabs-windows-functions.ps1",
 
     "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
@@ -47,6 +47,7 @@
     "nsgName": "[concat('nsg-', parameters('DeploymentID'))]",
     "publicIpName": "[concat('pip-', parameters('DeploymentID'))]",
     "nicName": "[concat('nic-', parameters('DeploymentID'))]",
+
     "dnsLabel": "[concat('labvm-', toLower(uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
 
     "addressPrefix": "10.10.0.0/16",
@@ -56,15 +57,19 @@
     "webAppName": "[concat('web-sre-', toLower(uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
 
     "logAnalyticsWorkspaceName": "[concat('law-sre-', toLower(uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
+
     "appInsightsName": "[concat('appi-sre-', parameters('DeploymentID'))]",
 
     "sreAgentName": "[concat('sreagent-', toLower(uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
+
     "sreAgentIdentityName": "[concat('id-sreagent-', parameters('DeploymentID'))]",
 
     "runbookPath": "C:\\LabFiles\\Runbooks\\appservice-http-500-triage.md",
 
     "readerRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
+
     "monitoringReaderRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '43d0d8ad-25c7-4714-9337-8ba259a9fe05')]",
+
     "logAnalyticsReaderRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '73c42c96-874c-492b-b04d-ab87d138a893')]"
   },
 
@@ -249,7 +254,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {},
         "protectedSettings": {
-          "commandToExecute": "powershell.exe -ExecutionPolicy Bypass -Command \"$ErrorActionPreference='Stop'; Write-Output 'Configuring lab VM user experience...'; $sm='HKLM:\\SOFTWARE\\Microsoft\\ServerManager'; New-Item -Path $sm -Force | Out-Null; New-ItemProperty -Path $sm -Name 'DoNotOpenServerManagerAtLogon' -PropertyType DWord -Value 1 -Force | Out-Null; $edge='HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge'; New-Item -Path $edge -Force | Out-Null; New-ItemProperty -Path $edge -Name 'HideFirstRunExperience' -PropertyType DWord -Value 1 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'BrowserSignin' -PropertyType DWord -Value 0 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'SyncDisabled' -PropertyType DWord -Value 1 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'WelcomePageAtFirstRunEnabled' -PropertyType DWord -Value 0 -Force | Out-Null; Write-Output 'Lab VM user experience configuration completed.'\""
+          "commandToExecute": "powershell.exe -ExecutionPolicy Bypass -Command \"$ErrorActionPreference='Stop'; $sm='HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Server\\ServerManager'; New-Item -Path $sm -Force | Out-Null; New-ItemProperty -Path $sm -Name 'DoNotOpenAtLogon' -PropertyType DWord -Value 1 -Force | Out-Null; $edge='HKLM:\\SOFTWARE\\Policies\\Microsoft\\Edge'; New-Item -Path $edge -Force | Out-Null; New-ItemProperty -Path $edge -Name 'HideFirstRunExperience' -PropertyType DWord -Value 1 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'BrowserSignin' -PropertyType DWord -Value 0 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'SyncDisabled' -PropertyType DWord -Value 1 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'WelcomePageAtFirstRunEnabled' -PropertyType DWord -Value 0 -Force | Out-Null; New-ItemProperty -Path $edge -Name 'WebToBrowserSignInEnabled' -PropertyType DWord -Value 0 -Force | Out-Null; Stop-Process -Name 'ServerManager' -Force -ErrorAction SilentlyContinue; Write-Output 'Lab UX configuration completed.'\""
         }
       }
     },
@@ -450,66 +455,80 @@
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName')), '2023-11-01').dnsSettings.fqdn]"
     },
+
     "vmServerUsername": {
       "type": "string",
       "value": "[parameters('adminUsername')]"
     },
+
     "vmServerPassword": {
       "type": "string",
       "value": "[parameters('adminPassword')]"
     },
+
     "trainerUserName": {
       "type": "string",
       "value": "[parameters('trainerUserName')]"
     },
+
     "trainerUserPassword": {
       "type": "string",
       "value": "[parameters('trainerUserPassword')]"
     },
+
     "labVmName": {
       "type": "string",
       "value": "[variables('LabVMName')]"
     },
+
     "workloadResourceGroupName": {
       "type": "string",
       "value": "[resourceGroup().name]"
     },
+
     "webAppName": {
       "type": "string",
       "value": "[variables('webAppName')]"
     },
+
     "webAppUrl": {
       "type": "string",
       "value": "[concat('https://', reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2023-12-01').defaultHostName)]"
     },
+
     "appInsightsName": {
       "type": "string",
       "value": "[variables('appInsightsName')]"
     },
+
     "logAnalyticsWorkspaceName": {
       "type": "string",
       "value": "[variables('logAnalyticsWorkspaceName')]"
     },
+
     "sreAgentName": {
       "type": "string",
       "value": "[variables('sreAgentName')]"
     },
+
     "sreAgentResourceId": {
       "type": "string",
       "value": "[resourceId('Microsoft.App/agents', variables('sreAgentName'))]"
     },
+
     "sreAgentPortalUrl": {
       "type": "string",
       "value": "https://sre.azure.com"
     },
+
     "sreAgentArmDeploymentEnabled": {
       "type": "string",
       "value": "[string(variables('deploySreAgent'))]"
     },
+
     "runbookPath": {
       "type": "string",
       "value": "[variables('runbookPath')]"
     }
   }
 }
-```
