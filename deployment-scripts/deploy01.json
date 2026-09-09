@@ -39,7 +39,7 @@
     "vnetName": "[concat('vnet-', parameters('DeploymentID'))]",
     "subnetName": "default",
     "nsgName": "[concat('nsg-', parameters('DeploymentID'))]",
-    "publicIpName": "[concat('pip-', parameters('DeploymentID'))]",
+    "publicIpAddressName": "[concat(variables('LabVMName'), '-pip')]",
     "nicName": "[concat('nic-', parameters('DeploymentID'))]",
     "dnsLabel": "[concat('labvm-', toLower(uniqueString(resourceGroup().id, parameters('DeploymentID'))))]",
     "addressPrefix": "10.10.0.0/16",
