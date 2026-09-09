@@ -50,11 +50,11 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 
    ![](./../media/ria-06.png)
 
-   | Resource | Expected value |
-   | --- | --- |
-   | App Service web app **(3)** | <inject key="webAppName"></inject> |
-   | Application Insights **(1)** | <inject key="appInsightsName"></inject> |
-   | Log Analytics workspace **(2)** | <inject key="logAnalyticsWorkspaceName"></inject> |
+   | Resource                        | Expected value                             |
+   | ------------------------------- | ------------------------------------------ |
+   | Application Insights **(1)**    | `<inject key="appInsightsName">`           |
+   | Log Analytics workspace **(2)** | `<inject key="logAnalyticsWorkspaceName">` |
+   | App Service web app **(3)**     | `<inject key="webAppName">`                |
 
 7. Open the App Service web app named <inject key="webAppName"></inject>.
 
