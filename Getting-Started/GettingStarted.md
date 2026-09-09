@@ -37,19 +37,7 @@ CloudLabs deploys a disposable lab environment that contains a Windows Lab VM, a
 
 ## 🖼️ Architecture Diagram
 
-```mermaid
-    flowchart LR
-    Learner[Lab user] --> LabVM[Windows Lab VM]
-    Learner --> AzurePortal[Azure portal]
-    Learner --> SREPortal[Azure SRE Agent portal]
-    LabVM --> Runbook[HTTP 500 triage runbook]
-    SREPortal --> Agent[Azure SRE Agent]
-    Agent --> WorkloadRG[Lab workload resource group]
-    WorkloadRG --> WebApp[Azure App Service web app]
-    WorkloadRG --> AppInsights[Application Insights]
-    WorkloadRG --> LogAnalytics[Log Analytics workspace]
-    AppInsights --> LogAnalytics
-```
+![](./../media/sre-agent-lab-technical.png)
 
 ## 🔍 Explanation of Components
 - **Windows Lab VM**: Provides browser access, tools, helper files, and the staged runbook used throughout the lab.
