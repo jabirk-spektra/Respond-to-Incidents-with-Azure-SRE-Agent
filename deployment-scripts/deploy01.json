@@ -25,36 +25,15 @@
     },
     "trainerUserPassword": {
       "type": "string"
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "eastus2",
-      "metadata": {
-        "description": "Azure region for the Lab VM and sample App Service workload."
-      }
-    },
-    "sreAgentLocation": {
-      "type": "string",
-      "defaultValue": "eastus2",
-      "allowedValues": [
-        "eastus2",
-        "swedencentral",
-        "australiaeast"
-      ],
-      "metadata": {
-        "description": "Azure SRE Agent supported region. Microsoft Learn lists East US 2, Sweden Central, and Australia East for preview deployment."
-      }
-    },
-    "deploySreAgent": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": "Preview opt-in. Set to true only after confirming Microsoft.App/agents is exposed in the target subscription with defaultApiVersion 2025-05-01-preview. The lab guide provides the sre.azure.com portal fallback when false."
-      }
     }
   },
   "variables": {
-    "scripturl": "https://experienceazure.blob.core.windows.net/templates/avm-terraform/psscript-01.ps1",
+    "location": "[resourceGroup().location]",
+    "sreAgentLocation": "eastus2",
+    "deploySreAgent": false,
+    "cloudlabsCommon": "[concat(' -AzureUserName ', parameters('azureUserName'), ' -AzurePassword ', parameters('azurePassword'), ' -AzureTenantID ', subscription().tenantId, ' -AzureSubscriptionID ', subscription().subscriptionId, ' -ODLID ', parameters('ODLID'), ' -DeploymentID ', parameters('DeploymentID'))]",
+    "enableCloudLabsEmbeddedShadow": "[concat(' -vmAdminUsername ', parameters('adminUsername'), ' -vmAdminPassword ', parameters('adminPassword'), ' -trainerUserName ', parameters('trainerUserName'), ' -trainerUserPassword ', parameters('trainerUserPassword'))]",
+    "scripturl": "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1",
     "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
     "vnetName": "[concat('vnet-', parameters('DeploymentID'))]",
     "subnetName": "default",
@@ -72,7 +51,7 @@
     "sreAgentIdentityName": "[concat('id-sreagent-', parameters('DeploymentID'))]",
     "runbookPath": "C:\\LabFiles\\Runbooks\\appservice-http-500-triage.md",
     "readerRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
-    "monitoringReaderRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '43d0d8ad-25c7-4714-9337-8ba259a9fe05d')]",
+    "monitoringReaderRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '43d0d8ad-25c7-4714-9337-8ba259a9fe05')]",
     "logAnalyticsReaderRoleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '73c42c96-874c-492b-b04d-ab87d138a893')]"
   },
   "resources": [
@@ -80,7 +59,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2023-11-01",
       "name": "[variables('nsgName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "properties": {
         "securityRules": [
           {
@@ -103,7 +82,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2023-11-01",
       "name": "[variables('vnetName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
       ],
@@ -130,7 +109,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-11-01",
       "name": "[variables('publicIpName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "sku": {
         "name": "Standard"
       },
@@ -145,7 +124,7 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2023-11-01",
       "name": "[variables('nicName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
         "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
@@ -171,7 +150,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2023-09-01",
       "name": "[variables('LabVMName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
       ],
@@ -215,7 +194,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "apiVersion": "2023-09-01",
       "name": "[concat(variables('LabVMName'), '/CustomScriptExtension')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', variables('LabVMName'))]"
       ],
@@ -226,11 +205,11 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1"
+            "[variables('scripturl')]"
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File psscript-01.ps1 -AzureUserName \\\"', parameters('azureUserName'), '\\\" -AzurePassword \\\"', parameters('azurePassword'), '\\\" -AzureTenantID \\\"', subscription().tenantId, '\\\" -AzureSubscriptionID \\\"', subscription().subscriptionId, '\\\" -ODLID \\\"', parameters('ODLID'), '\\\" -InstallCloudLabsShadow \\\"', parameters('ODLID'), '\\\" -DeploymentID \\\"', parameters('DeploymentID'), '\\\" -vmAdminUsername \\\"', parameters('adminUsername'), '\\\" -vmAdminPassword \\\"', parameters('adminPassword'), '\\\" -trainerUserName \\\"', parameters('trainerUserName'), '\\\" -trainerUserPassword \\\"', parameters('trainerUserPassword'), '\\\"')]"
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File psscript-01.ps1', variables('cloudlabsCommon'), variables('enableCloudLabsEmbeddedShadow'))]"
         }
       }
     },
@@ -238,7 +217,7 @@
       "type": "Microsoft.OperationalInsights/workspaces",
       "apiVersion": "2023-09-01",
       "name": "[variables('logAnalyticsWorkspaceName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "properties": {
         "sku": {
           "name": "PerGB2018"
@@ -252,7 +231,7 @@
       "type": "Microsoft.Insights/components",
       "apiVersion": "2020-02-02",
       "name": "[variables('appInsightsName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "kind": "web",
       "dependsOn": [
         "[resourceId('Microsoft.OperationalInsights/workspaces', variables('logAnalyticsWorkspaceName'))]"
@@ -266,7 +245,7 @@
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2023-12-01",
       "name": "[variables('appServicePlanName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "sku": {
         "name": "B1",
         "tier": "Basic",
@@ -280,7 +259,7 @@
       "type": "Microsoft.Web/sites",
       "apiVersion": "2023-12-01",
       "name": "[variables('webAppName')]",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "kind": "app",
       "identity": {
         "type": "SystemAssigned"
@@ -328,15 +307,15 @@
       "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
       "apiVersion": "2018-11-30",
       "name": "[variables('sreAgentIdentityName')]",
-      "condition": "[parameters('deploySreAgent')]",
-      "location": "[parameters('sreAgentLocation')]"
+      "condition": "[variables('deploySreAgent')]",
+      "location": "[variables('sreAgentLocation')]"
     },
     {
       "type": "Microsoft.App/agents",
       "apiVersion": "2025-05-01-preview",
       "name": "[variables('sreAgentName')]",
-      "condition": "[parameters('deploySreAgent')]",
-      "location": "[parameters('sreAgentLocation')]",
+      "condition": "[variables('deploySreAgent')]",
+      "location": "[variables('sreAgentLocation')]",
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
@@ -377,7 +356,7 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2022-04-01",
       "name": "[guid(resourceGroup().id, variables('sreAgentIdentityName'), 'reader')]",
-      "condition": "[parameters('deploySreAgent')]",
+      "condition": "[variables('deploySreAgent')]",
       "dependsOn": [
         "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('sreAgentIdentityName'))]"
       ],
@@ -391,7 +370,7 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2022-04-01",
       "name": "[guid(resourceGroup().id, variables('sreAgentIdentityName'), 'monitoring-reader')]",
-      "condition": "[parameters('deploySreAgent')]",
+      "condition": "[variables('deploySreAgent')]",
       "dependsOn": [
         "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('sreAgentIdentityName'))]"
       ],
@@ -405,7 +384,7 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2022-04-01",
       "name": "[guid(resourceGroup().id, variables('sreAgentIdentityName'), 'log-analytics-reader')]",
-      "condition": "[parameters('deploySreAgent')]",
+      "condition": "[variables('deploySreAgent')]",
       "dependsOn": [
         "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('sreAgentIdentityName'))]"
       ],
@@ -475,7 +454,7 @@
     },
     "sreAgentArmDeploymentEnabled": {
       "type": "string",
-      "value": "[string(parameters('deploySreAgent'))]"
+      "value": "[string(variables('deploySreAgent'))]"
     },
     "runbookPath": {
       "type": "string",
