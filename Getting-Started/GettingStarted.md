@@ -68,13 +68,13 @@ CloudLabs deploys a disposable lab environment that contains a Windows Lab VM, a
 
 Welcome to your Respond to Incidents with Azure SRE Agent lab! We've prepared a seamless environment for you to explore and learn about Azure services. Let's begin by making the most of this experience:
 
-### Accessing Your Lab Environment
+## Accessing Your Lab Environment
 
 Once you are ready to dive in, your virtual machine and this guide will be right at your fingertips within your web browser.
 
 ![](./../media/Accessing-Your-Lab-Environment.png)
 
-### Lab Guide Zoom In/Zoom Out
+## Lab Guide Zoom In/Zoom Out
 To adjust the zoom level for the environment page, click the **A↕** icon located next to the timer in the lab environment.
 
 ![](./../media/gs-01.png)
@@ -85,17 +85,17 @@ Use the **slider (three vertical dots)** located between the **Virtual Machine**
 
 ![](./../media/zoom-n.png)
 
-### Exploring Your Lab Resources
+## Exploring Your Lab Resources
 To get a better understanding of your lab resources and credentials, navigate to the **Environment** tab.
 
 ![](./../media/gs-04.png)
 
-### Utilizing the Split Window Feature
+## Utilizing the Split Window Feature
 For convenience, you can open the lab guide in a separate window by selecting the **Split Window** button from the top right corner.
 
 ![](./../media/gs-05.png)
 
-### Managing Your Virtual Machine
+## Managing Your Virtual Machine
 
 Feel free to start, stop, or restart your virtual machine as needed from the **Resources** tab. Your experience is in your hands!
 
