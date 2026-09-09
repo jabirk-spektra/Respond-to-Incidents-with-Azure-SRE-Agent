@@ -54,7 +54,7 @@
     }
   },
   "variables": {
-    "scripturl": "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1",
+    "scripturl": "https://experienceazure.blob.core.windows.net/templates/avm-terraform/psscript-01.ps1",
     "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
     "vnetName": "[concat('vnet-', parameters('DeploymentID'))]",
     "subnetName": "default",
@@ -226,7 +226,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "[variables('scripturl')]"
+            "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1"
           ]
         },
         "protectedSettings": {
