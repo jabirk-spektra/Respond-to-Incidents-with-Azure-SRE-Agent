@@ -15,16 +15,16 @@
       "value": "GET-DEPLOYMENT-ID"
     },
     "adminUsername": {
-      "value": "demouser"
+      "value": "azureuser"
     },
     "adminPassword": {
-      "value": "GET-AZUSER-PASSWORD"
+      "value": "GEN-PASSWORD"
     },
     "trainerUserName": {
       "value": "instructor"
     },
     "trainerUserPassword": {
-      "value": "GET-AZUSER-PASSWORD"
+      "value": "GEN-PASSWORD"
     }
   }
 }
