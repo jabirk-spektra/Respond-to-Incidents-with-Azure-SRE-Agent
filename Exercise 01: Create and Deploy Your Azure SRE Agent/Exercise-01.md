@@ -1,16 +1,14 @@
 # Exercise 01: Create and Deploy Your Azure SRE Agent
+### Estimated Duration: 30 Minutes
 
-### Estimated Duration: 30 minutes
-
-## Scenario
-
+## 📘 Scenario
 You are the site reliability engineer for a small Azure-hosted web application that has started returning intermittent HTTP 500 responses. Before you can use Azure SRE Agent to investigate the incident, you need to confirm the lab workload and telemetry are present, create or open the Azure SRE Agent, connect it to Application Insights or Log Analytics where available, and grant it scoped read-oriented access to the workload resource group.
 
-## Overview
-
+## 📖 Overview
 In this exercise, you will sign in to the Azure portal and Azure SRE Agent portal, inspect the lab-created App Service workload, and then follow one of two onboarding paths. If the ARM deployment already created the Azure SRE Agent, you will open and verify it. If the preview ARM resource was not available in your tenant, you will create the agent manually at https://sre.azure.com. You will then add Azure resource access at resource-group scope in Reader mode and confirm the agent can describe the resources it can see.
 
-## Objectives
+## 🎯 Objectives
+In this exercise, you will complete the following tasks:
 
 - Task 1: Sign in and review the lab workload resources
 - Task 2: Confirm Azure SRE Agent prerequisites and preview availability
@@ -19,7 +17,6 @@ In this exercise, you will sign in to the Azure portal and Azure SRE Agent porta
 - Task 5: Verify the agent can see the lab resources
 
 ## Task 1: Sign in and review the lab workload resources
-
 In this task, you will sign in with your CloudLabs-provided Azure account and locate the web app, Application Insights, and Log Analytics resources that the lab deployment created.
 
 1. Open a browser in the Lab VM and go to https://portal.azure.com.
@@ -56,10 +53,15 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 > [!Tip]
 > Keep the browser tabs for the lab resource group, the web app, Application Insights, and Log Analytics open. You will use these names when you verify the SRE Agent response later in the exercise.
 
+Congratulations on completing the task! Now, it's time to validate it. Here are the steps:
+
+- Hit the **Validate** button for the corresponding task. If you receive a success message, you can proceed to the next task.
+- If not, carefully read the error message and retry the step, following the instructions in the exercise guide.
+- If you need any assistance, don't hesitate to get in touch with us at cloudlabs-support@spektrasystems.com. We are available 24/7 to assist you.
+
 <validation step="Validate workload and telemetry readiness"/>
 
 ## Task 2: Confirm Azure SRE Agent prerequisites and preview availability
-
 In this task, you will confirm that the account and subscription can access the Azure SRE Agent preview resource type. Azure SRE Agent uses the ARM resource type **Microsoft.App/agents** and the preview API version **2025-05-01-preview**. The portal flow is the primary path for this lab because the preview schema and provider availability can vary by tenant.
 
 1. In the Azure portal, select **Cloud Shell** from the top toolbar.
@@ -101,20 +103,19 @@ In this task, you will confirm that the account and subscription can access the 
 
 10. Check whether an agent resource already exists in the lab resource group. In Cloud Shell, run the following command after replacing **LAB_WORKLOAD_RESOURCE_GROUP** with <inject key="workloadResourceGroupName"></inject>.
 
-   ```powershell
-   az resource list --resource-group "LAB_WORKLOAD_RESOURCE_GROUP" --resource-type "Microsoft.App/agents" --query "[].{name:name,location:location,provisioningState:properties.provisioningState,powerState:properties.powerState,endpoint:properties.agentEndpoint}" -o table
-   ```
+    ```powershell
+    az resource list --resource-group "LAB_WORKLOAD_RESOURCE_GROUP" --resource-type "Microsoft.App/agents" --query "[].{name:name,location:location,provisioningState:properties.provisioningState,powerState:properties.powerState,endpoint:properties.agentEndpoint}" -o table
+    ```
 
 11. Interpret the result:
 
-   - If a row appears and the state is **Succeeded** or **Running**, the agent was created by ARM. You will open it in Task 3.
-   - If no row appears, the preview ARM resource was not deployed in this tenant. You will create the agent manually in Task 3.
+    - If a row appears and the state is **Succeeded** or **Running**, the agent was created by ARM. You will open it in Task 3.
+    - If no row appears, the preview ARM resource was not deployed in this tenant. You will create the agent manually in Task 3.
 
 > [!Important]
 > Azure SRE Agent is currently available in **East US 2**, **Sweden Central**, and **Australia East**. Use **East US 2** unless the portal or your instructor directs you to another supported region.
 
 ## Task 3: Open the ARM-precreated agent or create an agent manually
-
 In this task, you will open the Azure SRE Agent portal and either verify the existing agent or create a new one. The agent creation wizard may show model provider options that vary by subscription and region. Select the default available provider unless your instructor gives a different value.
 
 1. Open a new browser tab and go to https://sre.azure.com.
@@ -155,7 +156,6 @@ In this task, you will open the Azure SRE Agent portal and either verify the exi
 > This lab does not require a source code repository connection. You can leave the **Code** card unconfigured and continue with telemetry and Azure resource access.
 
 ## Task 4: Connect telemetry and add Azure resource access in Reader mode
-
 In this task, you will connect available telemetry and grant the agent scoped Azure resource access. For safety and least privilege, use the lab workload resource group scope and select **Reader** permission level when the portal offers a choice.
 
 1. In the Azure SRE Agent setup page, locate the **Logs** card.
@@ -204,7 +204,6 @@ In this task, you will connect available telemetry and grant the agent scoped Az
 > Do not select **Privileged** mode in this lab. The goal is to let the agent inspect configuration, health, metrics, and logs without granting broad remediation permissions.
 
 ## Task 5: Verify the agent can see the lab resources
-
 In this task, you will use the Azure SRE Agent chat experience to verify that the agent can inspect the lab resource group and identify the workload resources.
 
 1. In the Azure SRE Agent portal, open the chat for your agent.
@@ -230,8 +229,15 @@ In this task, you will use the Azure SRE Agent chat experience to verify that th
 
 7. Keep the chat thread open. You will use the same agent in Exercise 2 after you upload the team runbook.
 
+Congratulations on completing the task! Now, it's time to validate it. Here are the steps:
+
+- Hit the **Validate** button for the corresponding task. If you receive a success message, you can proceed to the next exercise.
+- If not, carefully read the error message and retry the step, following the instructions in the exercise guide.
+- If you need any assistance, don't hesitate to get in touch with us at cloudlabs-support@spektrasystems.com. We are available 24/7 to assist you.
+
 <validation step="Validate SRE Agent deployment and Azure access setup"/>
 
-## Summary
-
+## 🧾 Summary
 In this exercise, you confirmed that the lab workload and telemetry resources are available, verified Microsoft.App/agents preview availability, opened or created an Azure SRE Agent in a supported region, connected telemetry where available, and granted the agent resource-group-scoped access in Reader mode. You also verified the setup by asking the agent what Azure resources it can see in the lab resource group.
+
+You have successfully completed the exercise. Click **Next >>** to continue to Exercise 2.
