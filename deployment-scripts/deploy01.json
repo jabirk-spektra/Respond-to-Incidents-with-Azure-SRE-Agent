@@ -230,7 +230,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File psscript-01.ps1 -AzureUserName \"', parameters('azureUserName'), '\" -AzurePassword \"', parameters('azurePassword'), '\" -AzureTenantID \"', subscription().tenantId, '\" -AzureSubscriptionID \"', subscription().subscriptionId, '\" -DeploymentID \"', parameters('DeploymentID'), '\" -vmAdminUsername \"', parameters('adminUsername'), '\" -vmAdminPassword \"', parameters('adminPassword'), '\" -trainerUserName \"', parameters('trainerUserName'), '\" -trainerUserPassword \"', parameters('trainerUserPassword'), '\"')]"
+          "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File psscript-01.ps1 -AzureUserName \"', parameters('azureUserName'), '\" -AzurePassword \"', parameters('azurePassword'), '\" -AzureTenantID \"', subscription().tenantId, '\" -AzureSubscriptionID \"', subscription().subscriptionId, '\" -ODLID \"', parameters('ODLID'), '\" -DeploymentID \"', parameters('DeploymentID'), '\" -vmAdminUsername \"', parameters('adminUsername'), '\" -vmAdminPassword \"', parameters('adminPassword'), '\" -trainerUserName \"', parameters('trainerUserName'), '\" -trainerUserPassword \"', parameters('trainerUserPassword'), '\"')]"
         }
       }
     },
