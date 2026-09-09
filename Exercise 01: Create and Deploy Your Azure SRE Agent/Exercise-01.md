@@ -19,39 +19,66 @@ In this exercise, you will complete the following tasks:
 ## Task 1: Sign in and review the lab workload resources
 In this task, you will sign in with your CloudLabs-provided Azure account and locate the web app, Application Insights, and Log Analytics resources that the lab deployment created.
 
-1. Open a browser in the Lab VM and go to https://portal.azure.com.
+1. In the Lab VM, click **Microsoft Edge**, and go to **Azure Portal.**
+      
+      ![](./../media/ria-01.png)
+
+   ```
+   https://portal.azure.com
+
+   ```
 
 2. Sign in with the following credentials:
 
-   - Username: <inject key="AzureAdUserEmail"></inject>
-   - Password: <inject key="AzureAdUserPassword"></inject>
-   - Tenant: <inject key="TenantID"></inject>
-   - Subscription: <inject key="SubscriptionID"></inject>
+   - Username: <inject key="AzureAdUserEmail"></inject>, click **Next**.
 
+      ![](./../media/ria-02.png)
+
+   - Password: <inject key="AzureAdUserPassword"></inject>, click **Sign in**.
+
+      ![](./../media/ria-03.png)
+   
 3. If prompted, complete any first-run Azure portal prompts by accepting defaults or selecting **Skip**.
 
-4. In the Azure portal search bar, search for **Resource groups**, and then select **Resource groups**.
+4. In the Azure portal search bar, search for **Resource groups (1)**, and then select **Resource groups (2)**.
 
-5. Open the lab workload resource group. Its ARM output name is <inject key="workloadResourceGroupName"></inject>. If you need to identify the lab by deployment, look for the resource group associated with **Deployment <inject key="DeploymentID" enableCopy="false"></inject>**.
+   ![](./../media/ria-04.png)
+
+5. Open the Azure-SRE-<inject key="DeploymentID" enableCopy="false"/> resource group.
+
+   ![](./../media/ria-05.png)
 
 6. Confirm the resource group contains the following lab resources:
 
+   ![](./../media/ria-06.png)
+
    | Resource | Expected value |
    | --- | --- |
-   | App Service web app | <inject key="webAppName"></inject> |
-   | Application Insights | <inject key="appInsightsName"></inject> |
-   | Log Analytics workspace | <inject key="logAnalyticsWorkspaceName"></inject> |
+   | App Service web app **(3)** | <inject key="webAppName"></inject> |
+   | Application Insights **(1)** | <inject key="appInsightsName"></inject> |
+   | Log Analytics workspace **(2)** | <inject key="logAnalyticsWorkspaceName"></inject> |
 
 7. Open the App Service web app named <inject key="webAppName"></inject>.
 
-8. On the App Service **Overview** page, select the web app URL to open the sample site in a new browser tab.
+   ![](./../media/ria-07.png)
 
-9. Return to the App Service page, and then select **Monitoring** > **Application Insights**. Confirm the web app is connected to Application Insights. If the portal shows a link to the Application Insights resource, open it and verify its name is <inject key="appInsightsName"></inject>.
+8. On the App Service **Overview** page, select the **web app** URL to open the sample site in a new browser tab.
 
-10. Go back to the lab resource group, open the Log Analytics workspace named <inject key="logAnalyticsWorkspaceName"></inject>, and confirm the **Overview** page loads.
+   ![](./../media/ria-08.png)
 
-> [!Tip]
-> Keep the browser tabs for the lab resource group, the web app, Application Insights, and Log Analytics open. You will use these names when you verify the SRE Agent response later in the exercise.
+   ![](./../media/ria-09.png)
+
+9. Return to the App Service page, and then select **Monitoring (1)** > **Application Insights (2)**. Confirm the web app is connected to Application Insights. If the portal shows a link to the Application Insights resource, open it and verify its name is **<inject key="appInsightsName"></inject> (3)**.
+
+   ![](./../media/ria-10.png)
+
+10. Go back to the lab resource group, open the Log Analytics workspace named **<inject key="logAnalyticsWorkspaceName"></inject>**, and confirm the **Overview** page loads.
+
+    ![](./../media/ria-11.png)
+
+    ![](./../media/ria-12.png)
+
+    >**Note**:Keep the browser tabs for the lab resource group, the web app, Application Insights, and Log Analytics open. You will use these names when you verify the SRE Agent response later in the exercise.
 
 Congratulations on completing the task! Now, it's time to validate it. Here are the steps:
 
@@ -64,17 +91,25 @@ Congratulations on completing the task! Now, it's time to validate it. Here are 
 ## Task 2: Confirm Azure SRE Agent prerequisites and preview availability
 In this task, you will confirm that the account and subscription can access the Azure SRE Agent preview resource type. Azure SRE Agent uses the ARM resource type **Microsoft.App/agents** and the preview API version **2025-05-01-preview**. The portal flow is the primary path for this lab because the preview schema and provider availability can vary by tenant.
 
-1. In the Azure portal, select **Cloud Shell** from the top toolbar.
+1. In the Azure portal, select **Cloud Shell (1)** from the top toolbar, and click **PowerShell (2)**.
+   
+   ![](./../media/ria-13.png)
 
-2. If Cloud Shell asks for a shell type, select **PowerShell**.
+3. If Cloud Shell prompts you to create a storage account, select **No storage account required (1)**. Then open the **Subscription (2)** dropdown and select the available **Subscription (3)** option to proceed.
 
-3. If Cloud Shell asks you to create storage, select the option to create it. Use the defaults unless your instructor provides different guidance.
+   ![](./../media/ria-14.png)
+
+1. Click **Apply**, and the **PowerShell** terminal will be launched.
+
+   ![](./../media/ria-15.png)
 
 4. Confirm that Cloud Shell is using the lab subscription by running the following command:
 
    ```powershell
    az account show --query "{name:name,id:id,tenantId:tenantId}" -o table
    ```
+
+   ![](./../media/ria-16.png)
 
 5. Confirm that the subscription ID shown by the command matches <inject key="SubscriptionID"></inject>.
 
@@ -84,76 +119,72 @@ In this task, you will confirm that the account and subscription can access the 
    az account set --subscription "LAB_SUBSCRIPTION_ID"
    ```
 
+   ![](./../media/ria-17.png)
+
 7. Check whether the **Microsoft.App** provider exposes the **agents** resource type in this tenant:
 
    ```powershell
    az provider show --namespace Microsoft.App --query "resourceTypes[?resourceType=='agents'].{resourceType:resourceType,apiVersions:apiVersions,locations:locations}" -o json
    ```
 
+   ![](./../media/ria-18.png)
+
 8. Review the output:
 
    - If you see **agents** and **2025-05-01-preview**, continue with the exercise.
    - If the output is empty or does not include **agents**, continue with the portal fallback in Task 3. The ARM deployment can still provide the web app, telemetry, and runbook for the lab.
 
-9. If the provider is not registered, run the following command and wait for registration to complete:
-
-   ```powershell
-   az provider register --namespace Microsoft.App
-   ```
-
-10. Check whether an agent resource already exists in the lab resource group. In Cloud Shell, run the following command after replacing **LAB_WORKLOAD_RESOURCE_GROUP** with <inject key="workloadResourceGroupName"></inject>.
-
-    ```powershell
-    az resource list --resource-group "LAB_WORKLOAD_RESOURCE_GROUP" --resource-type "Microsoft.App/agents" --query "[].{name:name,location:location,provisioningState:properties.provisioningState,powerState:properties.powerState,endpoint:properties.agentEndpoint}" -o table
-    ```
-
-11. Interpret the result:
-
-    - If a row appears and the state is **Succeeded** or **Running**, the agent was created by ARM. You will open it in Task 3.
-    - If no row appears, the preview ARM resource was not deployed in this tenant. You will create the agent manually in Task 3.
-
-> [!Important]
-> Azure SRE Agent is currently available in **East US 2**, **Sweden Central**, and **Australia East**. Use **East US 2** unless the portal or your instructor directs you to another supported region.
-
 ## Task 3: Open the ARM-precreated agent or create an agent manually
 In this task, you will open the Azure SRE Agent portal and either verify the existing agent or create a new one. The agent creation wizard may show model provider options that vary by subscription and region. Select the default available provider unless your instructor gives a different value.
 
-1. Open a new browser tab and go to https://sre.azure.com.
+1. Open a new browser tab and go to 
+
+   ```
+   https://sre.azure.com
+   ```
+1. After the tab is launched, click **Sign in**.
+
+   ![](./../media/sre-01.png)
 
 2. Sign in with the same Azure account you used for the Azure portal:
 
    - Username: <inject key="AzureAdUserEmail"></inject>
+
+      ![](./../media/ria-02.png)
+
    - Password: <inject key="AzureAdUserPassword"></inject>
 
-3. If you see a list of existing agents, look for the lab agent named <inject key="sreAgentName"></inject>.
+      ![](./../media/ria-03.png)
 
-4. If the agent named <inject key="sreAgentName"></inject> appears, select it and confirm the agent page opens. Continue to Task 4.
+5. Once logged in, select **Create agent**.
 
-5. If no lab agent appears, select **Create agent**.
+   ![](./../media/sre-02.png)
 
-6. On the **Basics** page, enter or select the following values:
+6. On the **Create agent** page, enter or select the following values:
 
    | Field | Value |
    | --- | --- |
-   | Subscription | <inject key="SubscriptionID"></inject> |
-   | Resource group | <inject key="workloadResourceGroupName"></inject> |
-   | Agent name | Use <inject key="sreAgentName"></inject> if the field accepts it. If the name is unavailable, append a short suffix such as your initials. |
-   | Region | **East US 2**. If unavailable, choose **Sweden Central** or **Australia East**. |
-   | Model provider | Select the default available provider for the selected region. |
-   | Application Insights | Select the existing Application Insights resource <inject key="appInsightsName"></inject> if the wizard offers existing resources. Otherwise, leave the default **Create new** selection. |
+   | Subscription | Select the available subscription **(1)** |
+   | Resource group | **<inject key="workloadResourceGroupName"></inject> (2)** |
+   | Agent name | Use **sreagent-<inject key="DeploymentID" enableCopy="false"/> (3)** |
+   | Region | **East US 2 (4)**. If unavailable, choose **Sweden Central** or **Australia East**. |
+   | Model provider | Select the default **(5)** available provider for the selected region. |
+   | Application Insights | Select the existing **(6)** Application Insights resource <inject key="appInsightsName"></inject> **(7) & (8)**, and click **Next (9)**.  |
 
-7. Select **Next**.
+   ![](./../media/sre-03.png)
 
-8. On the **Review** page, confirm the subscription, resource group, agent name, and region are correct.
+   ![](./../media/sre-04.png)
 
-9. Select **Create**.
+8. On the **Review** page, confirm the subscription, resource group, agent name, and region are correct. Click **Create**.
+
+    ![](./../media/sre-05.png)
 
 10. Wait for deployment to complete. Microsoft Learn notes that deployment commonly takes a few minutes. The deployment should show **Succeeded** and list the Azure SRE Agent resource and supporting resources that were created.
 
-11. Select **Set up your agent** when the deployment completes. The setup page should show the header **More context. Better investigations** and cards such as **Code**, **Logs**, **Azure resources**, and **Incidents**.
+11. Select **Set up your agent** when the deployment completes. The setup page should show the header **More context. Better investigations** and cards such as **Code**, **Logs**, **Azure resources**, and **Incidents**, click **Done and go to agent**.
 
-> [!Note]
-> This lab does not require a source code repository connection. You can leave the **Code** card unconfigured and continue with telemetry and Azure resource access.
+    ![](./../media/sre-07.png)
+
 
 ## Task 4: Connect telemetry and add Azure resource access in Reader mode
 In this task, you will connect available telemetry and grant the agent scoped Azure resource access. For safety and least privilege, use the lab workload resource group scope and select **Reader** permission level when the portal offers a choice.
