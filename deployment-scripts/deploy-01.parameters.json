@@ -21,10 +21,10 @@
       "value": "GET-AZUSER-PASSWORD"
     },
     "trainerUserName": {
-      "value": "GET-TRAINER-USERNAME"
+      "value": "instructor"
     },
     "trainerUserPassword": {
-      "value": "GET-TRAINER-PASSWORD"
+      "value": "GET-AZUSER-PASSWORD"
     }
   }
 }
