@@ -444,11 +444,11 @@
     },
     "sreAgentName": {
       "type": "string",
-      "value": "[variables('sreAgentName')]"
+      "value": "[if(variables('deploySreAgent'), variables('sreAgentName'), '')]"
     },
     "sreAgentResourceId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.App/agents', variables('sreAgentName'))]"
+      "value": "[if(variables('deploySreAgent'), resourceId('Microsoft.App/agents', variables('sreAgentName')), '')]"
     },
     "sreAgentPortalUrl": {
       "type": "string",
