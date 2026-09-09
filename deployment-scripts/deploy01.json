@@ -31,8 +31,8 @@
     "location": "[resourceGroup().location]",
     "sreAgentLocation": "eastus2",
     "deploySreAgent": false,
-    "cloudlabsCommon": "[concat(' -AzureUserName ', parameters('azureUserName'), ' -AzurePassword ', parameters('azurePassword'), ' -AzureTenantID ', subscription().tenantId, ' -AzureSubscriptionID ', subscription().subscriptionId, ' -ODLID ', parameters('ODLID'), ' -DeploymentID ', parameters('DeploymentID'))]",
-    "enableCloudLabsEmbeddedShadow": "[concat(' -vmAdminUsername ', parameters('adminUsername'), ' -vmAdminPassword ', parameters('adminPassword'), ' -trainerUserName ', parameters('trainerUserName'), ' -trainerUserPassword ', parameters('trainerUserPassword'))]",
+    "cloudlabsCommon": "[concat(' -AzureUserName \"', parameters('azureUserName'), '\" -AzurePassword \"', parameters('azurePassword'), '\" -AzureTenantID \"', subscription().tenantId, '\" -AzureSubscriptionID \"', subscription().subscriptionId, '\" -ODLID \"', parameters('ODLID'), '\" -DeploymentID \"', parameters('DeploymentID'), '\"')]",
+    "enableCloudLabsEmbeddedShadow": "[concat(' -vmAdminUsername \"', parameters('adminUsername'), '\" -vmAdminPassword \"', parameters('adminPassword'), '\" -trainerUserName \"', parameters('trainerUserName'), '\" -trainerUserPassword \"', parameters('trainerUserPassword'), '\"')]",
     "scripturl": "https://jkstrg.blob.core.windows.net/templates/psscript-01.ps1",
     "commonFunctionsUrl": "https://experienceazure.blob.core.windows.net/templates/cloudlabs-common/cloudlabs-windows-functions.ps1",
     "LabVMName": "[concat('labvm-', parameters('DeploymentID'))]",
@@ -178,7 +178,7 @@
           "osDisk": {
             "createOption": "FromImage",
             "managedDisk": {
-              "storageAccountType": "StandardSSD_LRS"
+              "storageAccountType": "Premium_LRS"
             }
           }
         },
