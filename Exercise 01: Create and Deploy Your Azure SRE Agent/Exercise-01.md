@@ -203,26 +203,16 @@ In this task, you will use the Azure SRE Agent chat experience to verify that th
    What Azure resources can you see in this lab resource group? Focus on the resource group named Azure-SRE-<inject key="DeploymentID" enableCopy="false"/>. Include the App Service web app, Application Insights resource, and Log Analytics workspace if you can access them.
    ```
 
+   ![](./../media/sre-12.png)
+
 4. Review the response. A successful response should mention one or more of these lab resources:
 
-   - The web app named <inject key="webAppName"></inject>
-   - The Application Insights resource named <inject key="appInsightsName"></inject>
-   - The Log Analytics workspace named <inject key="logAnalyticsWorkspaceName"></inject>
-   - The lab workload resource group named <inject key="workloadResourceGroupName"></inject>
-
-5. If the agent says it cannot access Azure resources, return to **Builder** or **Setup**, open the **Azure resources** card, and confirm that the resource group <inject key="workloadResourceGroupName"></inject> is connected in **Reader** mode.
-
-6. If the agent can see the resource group but not telemetry, return to the **Logs** card and confirm that either Application Insights <inject key="appInsightsName"></inject> or Log Analytics workspace <inject key="logAnalyticsWorkspaceName"></inject> is connected.
+   - The web app named **<inject key="webAppName"></inject>**
+   - The Application Insights resource named **<inject key="appInsightsName"></inject>**
+   - The Log Analytics workspace named **<inject key="logAnalyticsWorkspaceName"></inject>**
+   - The lab workload resource group named **<inject key="workloadResourceGroupName"></inject>**
 
 7. Keep the chat thread open. You will use the same agent in Exercise 2 after you upload the team runbook.
-
-Congratulations on completing the task! Now, it's time to validate it. Here are the steps:
-
-- Hit the **Validate** button for the corresponding task. If you receive a success message, you can proceed to the next exercise.
-- If not, carefully read the error message and retry the step, following the instructions in the exercise guide.
-- If you need any assistance, don't hesitate to get in touch with us at cloudlabs-support@spektrasystems.com. We are available 24/7 to assist you.
-
-<validation step="Validate SRE Agent deployment and Azure access setup"/>
 
 ## 🧾 Summary
 In this exercise, you confirmed that the lab workload and telemetry resources are available, verified Microsoft.App/agents preview availability, opened or created an Azure SRE Agent in a supported region, connected telemetry where available, and granted the agent resource-group-scoped access in Reader mode. You also verified the setup by asking the agent what Azure resources it can see in the lab resource group.
