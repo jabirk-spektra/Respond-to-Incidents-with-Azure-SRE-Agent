@@ -28,7 +28,7 @@
     },
     "location": {
       "type": "string",
-      "defaultValue": "[resourceGroup().location]",
+      "defaultValue": "eastus2",
       "metadata": {
         "description": "Azure region for the Lab VM and sample App Service workload."
       }
