@@ -425,14 +425,6 @@
     "Region": {
       "type": "string",
       "value": "[variables('location')]"
-    },
-    "Foundry Resource Name": {
-      "type": "string",
-      "value": "[variables('foundryHubName')]"
-    },
-    "Foundry Project Name": {
-      "type": "string",
-      "value": "[variables('foundryProjectName')]"
     }
   }
 }
