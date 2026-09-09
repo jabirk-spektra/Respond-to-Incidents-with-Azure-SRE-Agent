@@ -178,62 +178,29 @@ In this task, you will open the Azure SRE Agent portal and either verify the exi
 ## Task 4: Connect telemetry and add Azure resource access in Reader mode
 In this task, you will connect available telemetry and grant the agent scoped Azure resource access. For safety and least privilege, use the lab workload resource group scope and select **Reader** permission level when the portal offers a choice.
 
-1. In the Azure SRE Agent setup page, locate the **Logs** card.
+1. In the Azure SRE Agent setup page, click **Monitor** dropdown **(1)**, and select **Logs (2)**.
 
-2. Select the **+** button on the **Logs** card.
+    ![](./../media/sre-08.png)
 
-3. In **Configure logging provider**, select one of the following providers based on what the portal offers:
+2. You will be redirected to the **Azure Portal**, here you can see the **Logs**.
 
-   - **Application Insights**, for application requests, failures, dependencies, and performance telemetry.
-   - **Log Analytics Workspace**, for logs, activity logs, and metrics in the workspace.
+   ![](./../media/sre-09.png)
 
-4. Select **Next**.
+1. Select the **Dropdown** to expand and view the log details.
 
-5. Select the lab telemetry resource:
-
-   - Application Insights: <inject key="appInsightsName"></inject>
-   - Log Analytics workspace: <inject key="logAnalyticsWorkspaceName"></inject>
-
-6. Select **Next** to review the connector settings.
-
-7. Select **Add connector**.
-
-8. Wait until the **Logs** card shows a green checkmark or lists the connected telemetry source.
-
-9. On the **Quickstart** tab, find the **Azure resources** card and select **Add resources**.
-
-10. In **Choose resource type**, select **Resource group**, and then select **Next**.
-
-11. In the **Subscription** filter, select the lab subscription <inject key="SubscriptionID"></inject> if it is not already selected.
-
-12. Search for and select the resource group named <inject key="workloadResourceGroupName"></inject>.
-
-13. Select **Next** to review agent permissions.
-
-14. When the wizard asks for the permission level, select **Reader**.
-
-15. Review the role assignments that will be granted to the agent managed identity. In Reader mode, the portal should grant read-oriented access such as **Reader**, **Monitoring Reader**, and **Log Analytics Reader**, plus any required resource-type reader or operator roles.
-
-16. Select **Add resource group**.
-
-17. Wait for role assignment to complete. This can take several minutes. When complete, the **Azure resources** card should list <inject key="workloadResourceGroupName"></inject>.
-
-18. Select **Done and go to agent** to open the agent chat.
-
-> [!Important]
-> Do not select **Privileged** mode in this lab. The goal is to let the agent inspect configuration, health, metrics, and logs without granting broad remediation permissions.
+   ![](./../media/sre-10.png)
 
 ## Task 5: Verify the agent can see the lab resources
 In this task, you will use the Azure SRE Agent chat experience to verify that the agent can inspect the lab resource group and identify the workload resources.
 
-1. In the Azure SRE Agent portal, open the chat for your agent.
+1. In the Azure SRE Agent portal, open the **+ New chat** for your agent.
 
-2. If the agent asks you to select an agent or start a new thread, select the agent you created or verified in Task 3 and start a new chat.
+   ![](./../media/sre-11.png)
 
-3. Paste the following prompt into the chat box. Replace **LAB_WORKLOAD_RESOURCE_GROUP** with <inject key="workloadResourceGroupName"></inject> if you copied the prompt from this guide:
+3. Paste the following prompt into the chat box. 
 
    ```text
-   What Azure resources can you see in this lab resource group? Focus on the resource group named LAB_WORKLOAD_RESOURCE_GROUP. Include the App Service web app, Application Insights resource, and Log Analytics workspace if you can access them.
+   What Azure resources can you see in this lab resource group? Focus on the resource group named Azure-SRE-<inject key="DeploymentID" enableCopy="false"/>. Include the App Service web app, Application Insights resource, and Log Analytics workspace if you can access them.
    ```
 
 4. Review the response. A successful response should mention one or more of these lab resources:
