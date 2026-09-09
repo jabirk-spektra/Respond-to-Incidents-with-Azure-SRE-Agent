@@ -42,7 +42,7 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 
    ![](./../media/ria-04.png)
 
-5. Open the Azure-SRE-<inject key="DeploymentID" enableCopy="false"/> resource group.
+5. Open the **Azure-SRE-<inject key="DeploymentID" enableCopy="false"/>** resource group.
 
    ![](./../media/ria-05.png)
 
@@ -56,11 +56,11 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
    | Log Analytics workspace **(2)** | <inject key="logAnalyticsWorkspaceName"></inject> |
    | App Service web app **(3)** | <inject key="webAppName"></inject> |
 
-7. Open the App Service web app named <inject key="webAppName"></inject>.
+7. Open the App Service web app named **<inject key="webAppName"></inject>**
 
    ![](./../media/ria-07.png)
 
-8. On the App Service **Overview** page, select the **web app** URL to open the sample site in a new browser tab.
+8. On the App Service **Overview** page, select the **Web app** URL to open the sample site in a new browser tab.
 
    ![](./../media/ria-08.png)
 
