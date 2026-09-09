@@ -26,9 +26,6 @@
     "trainerUserPassword": {
       "value": "GEN-PASSWORD"
     },
-    "location": {
-      "value": "[resourceGroup().location]"
-    },
     "sreAgentLocation": {
       "value": "eastus2"
     },
