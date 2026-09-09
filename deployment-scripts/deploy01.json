@@ -109,7 +109,7 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-11-01",
-      "name": "[variables('publicIpName')]",
+      "name": "[variables('publicIpAddressName')]",
       "location": "[variables('location')]",
       "sku": {
         "name": "Standard"
@@ -128,7 +128,7 @@
       "location": "[variables('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
-        "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -140,7 +140,7 @@
                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('subnetName'))]"
               },
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
               }
             }
           }
@@ -398,47 +398,38 @@
     }
   ],
   "outputs": {
-
     "DeploymentID": {
       "type": "string",
       "value": "[parameters('DeploymentID')]"
     },
-
     "LabVM Admin Username": {
       "type": "string",
       "value": "[parameters('adminUsername')]"
     },
-
     "LabVM Admin Password": {
       "type": "string",
       "value": "[parameters('adminPassword')]"
     },
-
     "LabVM DNS Name": {
       "type": "string",
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))).dnsSettings.fqdn]"
     },
-
     "Trainer User Name": {
       "type": "string",
       "value": "[parameters('trainerUserName')]"
     },
-
     "Trainer Password": {
       "type": "string",
       "value": "[parameters('trainerUserPassword')]"
     },
-
     "Region": {
       "type": "string",
       "value": "[variables('location')]"
     },
-
     "Foundry Resource Name": {
       "type": "string",
       "value": "[variables('foundryHubName')]"
     },
-
     "Foundry Project Name": {
       "type": "string",
       "value": "[variables('foundryProjectName')]"
