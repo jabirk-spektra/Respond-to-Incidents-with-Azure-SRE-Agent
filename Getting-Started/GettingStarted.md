@@ -38,7 +38,7 @@ CloudLabs deploys a disposable lab environment that contains a Windows Lab VM, a
 ## 🖼️ Architecture Diagram
 
 ```mermaid
-flowchart LR
+    flowchart LR
     Learner[Lab user] --> LabVM[Windows Lab VM]
     Learner --> AzurePortal[Azure portal]
     Learner --> SREPortal[Azure SRE Agent portal]
