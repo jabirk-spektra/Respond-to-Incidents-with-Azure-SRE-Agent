@@ -15,25 +15,16 @@
       "value": "GET-DEPLOYMENT-ID"
     },
     "adminUsername": {
-      "value": "azureuser"
+      "value": "demouser"
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
+      "value": "GET-AZUSER-PASSWORD"
     },
     "trainerUserName": {
-      "value": "instructor"
+      "value": "GET-TRAINER-USERNAME"
     },
     "trainerUserPassword": {
-      "value": "GEN-PASSWORD"
-    },
-    "location": {
-      "value": "eastus2"
-    },
-    "sreAgentLocation": {
-      "value": "eastus2"
-    },
-    "deploySreAgent": {
-      "value": false
+      "value": "GET-TRAINER-PASSWORD"
     }
   }
 }
