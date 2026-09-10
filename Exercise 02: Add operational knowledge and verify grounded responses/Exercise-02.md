@@ -2,16 +2,16 @@
 ### Estimated Duration: 25 Minutes
 
 ## 📘 Scenario
-Your Azure SRE Agent can now inspect the lab workload, but it does not yet know your team's incident response procedures. In this exercise, you will upload a prepared App Service HTTP 500 triage runbook to the agent's Knowledge base, wait for it to be indexed, and verify that the agent uses that runbook when answering incident triage questions.
+Your Azure SRE Agent can now inspect Contoso's lab workload, but it does not yet know Contoso's incident response procedures. In this exercise, you will upload a prepared App Service HTTP 500 triage runbook to the agent's Knowledge sources, wait for it to be indexed, and verify that the agent uses that runbook when answering incident triage questions.
 
 ## 📖 Overview
-You will review the local runbook staged on the Lab VM, upload it to Azure SRE Agent through **Builder > Knowledge base**, and then compare a broad troubleshooting answer with a response that is explicitly grounded in the uploaded runbook. The goal is to prove that the agent can reference team-specific guidance instead of only providing generic Azure troubleshooting advice.
+You will review the local runbook staged on the Lab VM, upload it to Azure SRE Agent through **Builder > Knowledge sources**, and then compare a broad troubleshooting answer with a response that is explicitly grounded in the uploaded runbook. The goal is to prove that the agent can reference team-specific guidance instead of only providing generic Azure troubleshooting advice.
 
 ## 🎯 Objectives
 In this exercise, you will complete the following tasks:
 
 - Task 1: Review the local App Service HTTP 500 runbook
-- Task 2: Upload the runbook to the Azure SRE Agent Knowledge base
+- Task 2: Upload the runbook to the Azure SRE Agent Knowledge sources
 - Task 3: Verify indexing and knowledge inventory
 - Task 4: Compare generic and runbook-grounded incident responses
 - Task 5: Refine the knowledge-grounded response
@@ -54,11 +54,11 @@ In this task, you will open the prepared Markdown runbook on the Lab VM and iden
 
 6. Keep the file location open. You will upload this exact file in the next task.
 
-   >**Note:** Azure SRE Agent supports persistent knowledge uploads for runbooks and troubleshooting guides. The prepared runbook is a Markdown file, which is a supported format for Knowledge base uploads.
+   >**Note:** Azure SRE Agent supports persistent knowledge uploads for runbooks and troubleshooting guides. The prepared runbook is a Markdown file, which is a supported format for Knowledge sources uploads.
 
-## Task 2: Upload the runbook to the Azure SRE Agent Knowledge base
+## Task 2: Upload the runbook to the Azure SRE Agent Knowledge sources
 
-In this task, you will add the runbook as long-term knowledge for the agent. Files uploaded to the Knowledge base are indexed so the agent can search and reference them in future conversations.
+In this task, you will add the runbook as long-term knowledge for the agent. Files uploaded to Knowledge sources are indexed so the agent can search and reference them in future conversations.
 
 1. In your browser, navigate to <https://sre.azure.com>
 
@@ -210,7 +210,10 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
 
 7. Review the suggested improvements. Useful suggestions might include adding owner contacts, dependency names, exact KQL queries, severity definitions, rollback criteria, or links to dashboards.
 
+> [!Tip]
+> Strong incident checklists combine team-specific runbook guidance with live Azure signals. If the response only gives generic advice, continue prompting the agent to use **appservice-http-500-triage.md** and to name the Azure signal that supports each action.
+
 ## 🧾 Summary
 You uploaded the App Service HTTP 500 triage runbook to Azure SRE Agent, waited for indexing, and verified that the agent could discover and use the runbook in chat. You also compared generic troubleshooting guidance with a runbook-grounded incident response and refined that response into an actionable checklist for the lab's intermittent HTTP 500 incident scenario. The agent is now configured to use team operational knowledge when responding to the lab workload.
 
-🎉 You have successfully finished the lab. In this lab, you onboarded Azure SRE Agent against a sample Azure incident environment, scoped it to least-privilege Reader access over the workload resource group, and grounded its incident-triage responses in your team's own HTTP 500 runbook — turning a generic troubleshooting assistant into one that reflects your organization's documented operational practice.
+🎉 You have successfully finished the lab. In this lab, you onboarded Azure SRE Agent against Contoso's sample Azure incident environment, scoped its Azure resource access to the workload resource group with least privilege, and grounded its incident-triage responses in Contoso's own HTTP 500 runbook — turning a generic troubleshooting assistant into one that reflects Contoso's documented operational practice.

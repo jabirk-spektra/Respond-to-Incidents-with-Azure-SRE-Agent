@@ -2,7 +2,7 @@
 ### Overall Estimated Duration: 60 Minutes
 
 ## 📘 Lab Scenario
-You are acting as a site reliability engineer for a small Azure-hosted web application that has started returning intermittent HTTP 500 responses. In this lab, you will onboard Azure SRE Agent, grant it read-oriented access to a scoped lab workload, and add a team runbook so the agent can answer operational questions using your documented procedures instead of generic troubleshooting advice.
+You are acting as a site reliability engineer for Contoso, whose small Azure-hosted web application has started returning intermittent HTTP 500 responses. In this lab, you will onboard Azure SRE Agent, confirm it is scoped to Contoso's lab workload, and add a team runbook so the agent can answer operational questions using Contoso's documented procedures instead of generic troubleshooting advice.
 
 The lab is designed for a **60-minute** session. Spend the first few minutes reviewing the environment here, then complete Exercise 1 and Exercise 2.
 
@@ -13,8 +13,8 @@ In this lab, you will:
 - Review a pre-created Azure App Service workload, Application Insights resource, and Log Analytics workspace.
 - Open the Azure SRE Agent portal at <https://sre.azure.com>.
 - Verify whether the Azure SRE Agent was created by the deployment, or create it manually in the portal if the preview ARM deployment path is unavailable in your tenant.
-- Grant the agent scoped access to the lab workload resource group using the safest available read-only or review-oriented options.
-- Upload the staged runbook [C:\LabFiles\Runbooks\appservice-http-500-triage.md](file:///C:/LabFiles/Runbooks/appservice-http-500-triage.md) to the agent knowledge base in Exercise 2.
+- Confirm the agent's Azure resource access is scoped to the lab workload resource group, keeping its visibility limited to that workload.
+- Upload the staged runbook [C:\LabFiles\Runbooks\appservice-http-500-triage.md](file:///C:/LabFiles/Runbooks/appservice-http-500-triage.md) to the agent's Knowledge sources in Exercise 2.
 
 ## 🎯 Objectives
 After completing this lab, you will be able to:
@@ -22,8 +22,8 @@ After completing this lab, you will be able to:
 - Describe the Azure resources that make up the sample incident environment.
 - Explain the preview status and supported-region requirements for Azure SRE Agent.
 - Create or verify an Azure SRE Agent in the Azure SRE Agent portal.
-- Configure the agent to inspect a workload resource group with least-privilege access.
-- Add Markdown runbook knowledge to Azure SRE Agent and verify that responses cite or reference the uploaded guidance.
+- Confirm the agent's Azure resource access is scoped to a single workload resource group, limiting its visibility with least privilege.
+- Add Markdown runbook knowledge to Azure SRE Agent's Knowledge sources and verify that responses cite or reference the uploaded guidance.
 
 ## ⚙️ Prerequisites
 - Familiarity with the Azure portal and basic role-based access control (RBAC) concepts.
@@ -48,7 +48,7 @@ CloudLabs deploys a disposable lab environment that contains a Windows Lab VM, a
 
 - **Log Analytics workspace**: Stores queryable operational data used by Application Insights and Azure Monitor, and can be connected to the agent as a KQL-queryable log source.
 
-- **Runbook file**: Provides team-specific incident guidance for App Service HTTP 500 triage. The staged file is [C:\LabFiles\Runbooks\appservice-http-500-triage.md](file:///C:/LabFiles/Runbooks/appservice-http-500-triage.md). You upload this file to the agent's Knowledge base in Exercise 2 so that chat responses can be grounded in team-specific guidance.
+- **Runbook file**: Provides team-specific incident guidance for App Service HTTP 500 triage. The staged file is [C:\LabFiles\Runbooks\appservice-http-500-triage.md](file:///C:/LabFiles/Runbooks/appservice-http-500-triage.md). You upload this file to the agent's Knowledge sources in Exercise 2 so that chat responses can be grounded in team-specific guidance.
 
 - **Azure SRE Agent**: Provides the agent experience for resource inspection, operational chat, and knowledge-grounded incident response. It may be pre-created by the deployment or created manually in Exercise 1.
 
