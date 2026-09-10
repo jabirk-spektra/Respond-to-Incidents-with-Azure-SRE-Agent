@@ -22,11 +22,11 @@ In this task, you will open the prepared Markdown runbook on the Lab VM and iden
 
 1. If your SRE Agent portal session has expired, open <https://sre.azure.com> and sign in with the lab credentials:
 
-   - Username: <inject key="AzureAdUserEmail"></inject>
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
 
       ![](./../media/ria-02.png)
 
-   - Password: <inject key="AzureAdUserPassword"></inject>
+   - **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
 
       ![](./../media/ria-03.png)
 
@@ -60,7 +60,7 @@ In this task, you will open the prepared Markdown runbook on the Lab VM and iden
 
 In this task, you will add the runbook as long-term knowledge for the agent. Files uploaded to Knowledge sources are indexed so the agent can search and reference them in future conversations.
 
-1. In your browser, navigate to <https://sre.azure.com>
+1. In your browser, navigate to **Azure SRE Agent** portal.
 
 2. Select the Azure SRE Agent that you created or verified in Exercise 1.
 
@@ -139,6 +139,8 @@ In this task, you will compare a general troubleshooting answer with a runbook-g
    ```text
    Suppose the web app is returning intermittent HTTP 500 errors. Use the uploaded runbook and the Azure resources you can access to recommend first checks and escalation criteria.
    ```
+
+   >**Note:** If the Agent prompts you to grant permissions, select **Grant permissions** to proceed.
 
    ![](./../media/run-17.png)
 

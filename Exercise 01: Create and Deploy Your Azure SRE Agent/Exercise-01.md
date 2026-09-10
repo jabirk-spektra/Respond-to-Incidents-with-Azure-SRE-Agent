@@ -5,7 +5,8 @@
 You are the site reliability engineer for Contoso, whose small Azure-hosted web application has started returning intermittent HTTP 500 responses. Before you can use Azure SRE Agent to investigate the incident, you need to confirm Contoso's lab workload and telemetry are present, create or open the Azure SRE Agent, connect it to Application Insights or Log Analytics where available, and confirm it is scoped to the workload resource group.
 
 ## 📖 Overview
-In this exercise, you will sign in to the Azure portal and Azure SRE Agent portal, inspect the lab-created App Service workload, and then follow one of two onboarding paths. If the ARM deployment already created the Azure SRE Agent, you will open and verify it. If the preview ARM resource was not available in your tenant, you will create the agent manually at https://sre.azure.com, scoping it to the lab workload resource group during creation. You will then confirm the agent's telemetry connection and verify that its resource-group scope lets it describe the resources it can see.
+
+In this exercise, you will sign in to the **Azure portal** and **Azure SRE Agent portal**, review the lab-created App Service workload, and manually create the Azure SRE Agent, scoping it to the lab workload resource group. You will then verify the agent’s telemetry connection and confirm that its resource-group scope allows it to describe the resources within its assigned scope.
 
 ## 🎯 Objectives
 In this exercise, you will complete the following tasks:
@@ -17,7 +18,7 @@ In this exercise, you will complete the following tasks:
 - Task 5: Verify the agent can see the lab resources
 
 ## Task 1: Sign in and review the lab workload resources
-In this task, you will sign in with your CloudLabs-provided Azure account and locate the web app, Application Insights, and Log Analytics resources that the lab deployment created.
+In this task, you will sign in to your Azure account and locate the **Web app**, **Application Insights**, and **Log Analytics** resources that the lab deployment created.
 
 1. In the Lab VM, click **Microsoft Edge**, and go to **Azure Portal.**
       
@@ -30,14 +31,18 @@ In this task, you will sign in with your CloudLabs-provided Azure account and lo
 
 2. Sign in with the following credentials:
 
-   - Username: <inject key="AzureAdUserEmail"></inject>, click **Next**.
+   - **Email/Username** <inject key="AzureAdUserEmail"></inject>
 
       ![](./../media/ria-02.png)
 
-   - Password: <inject key="AzureAdUserPassword"></inject>, click **Sign in**.
+   - **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
 
       ![](./../media/ria-03.png)
+
+1. If prompted to stay signed in, you can click **Yes.**
    
+      ![](./../media/signed-n.png)
+
 4. In the Azure portal search bar, search for **Resource groups (1)**, and then select **Resource groups (2)**.
 
    ![](./../media/ria-04.png)
@@ -137,11 +142,11 @@ In this task, you will open the Azure SRE Agent portal and either verify the exi
 
 2. Sign in with the same Azure account you used for the Azure portal:
 
-   - Username: <inject key="AzureAdUserEmail"></inject>
+   - **Email/Username**: <inject key="AzureAdUserEmail"></inject>
 
       ![](./../media/ria-02.png)
 
-   - Password: <inject key="AzureAdUserPassword"></inject>
+   - **Temporary Access Pass:** <inject key="AzureAdUserPassword"></inject>
 
       ![](./../media/ria-03.png)
 
@@ -206,6 +211,8 @@ In this task, you will use the Azure SRE Agent chat experience to verify that th
    ```
 
    ![](./../media/sre-12.png)
+
+   >**Note:** If the Agent prompts you to grant permissions, select **Grant permissions** to proceed.
 
 4. Review the response. A successful response should mention one or more of these lab resources:
 
