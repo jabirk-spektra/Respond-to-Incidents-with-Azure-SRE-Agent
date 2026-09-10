@@ -213,4 +213,6 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
 ## 🧾 Summary
 You uploaded the App Service HTTP 500 triage runbook to Azure SRE Agent, waited for indexing, and verified that the agent could discover and use the runbook in chat. You also compared generic troubleshooting guidance with a runbook-grounded incident response and refined that response into an actionable checklist for the lab's intermittent HTTP 500 incident scenario. The agent is now configured to use team operational knowledge when responding to the lab workload.
 
-🎉 You have successfully finished the lab. In this lab, you onboarded Azure SRE Agent against Contoso's sample Azure incident environment, scoped its Azure resource access to the workload resource group with least privilege, and grounded its incident-triage responses in Contoso's own HTTP 500 runbook — turning a generic troubleshooting assistant into one that reflects Contoso's documented operational practice.
+## 🎉 You have successfully finished the lab. 
+
+In this lab, you onboarded Azure SRE Agent against Contoso's sample Azure incident environment, scoped its Azure resource access to the workload resource group with least privilege, and grounded its incident-triage responses in Contoso's own HTTP 500 runbook — turning a generic troubleshooting assistant into one that reflects Contoso's documented operational practice.
