@@ -17,18 +17,30 @@ In this exercise, you will complete the following tasks:
 - Task 5: Refine the knowledge-grounded response
 
 ## Task 1: Review the local App Service HTTP 500 runbook
+
 In this task, you will open the prepared Markdown runbook on the Lab VM and identify the operational details the agent should use later.
 
 1. If your SRE Agent portal session has expired, open <https://sre.azure.com> and sign in with the lab credentials:
 
    - Username: <inject key="AzureAdUserEmail"></inject>
+
+      ![](./../media/ria-02.png)
+
    - Password: <inject key="AzureAdUserPassword"></inject>
+
+      ![](./../media/ria-03.png)
 
 2. On the Lab VM, open **File Explorer**.
 
+   ![](./../media/run-01.png)
+
 3. Browse to **C:\LabFiles\Runbooks**.
 
-4. Open **appservice-http-500-triage.md** in Notepad, Visual Studio Code, or another text editor.
+   ![](./../media/run-02.png)
+
+4. Open **appservice-http-500-triage.md** in Notepad.
+
+   ![](./../media/run-03.png)
 
 5. Review the runbook and note the sections that are specific to this lab scenario. Look for guidance such as:
 
@@ -38,51 +50,54 @@ In this task, you will open the prepared Markdown runbook on the Lab VM and iden
    - KQL query examples for failed requests, exceptions, and dependencies.
    - Escalation criteria and mitigation guidance.
 
+   ![](./../media/run-04.png)
+
 6. Keep the file location open. You will upload this exact file in the next task.
 
-> [!Note]
-> Azure SRE Agent supports persistent knowledge uploads for runbooks and troubleshooting guides. The prepared runbook is a Markdown file, which is a supported format for Knowledge base uploads.
+   >**Note:** Azure SRE Agent supports persistent knowledge uploads for runbooks and troubleshooting guides. The prepared runbook is a Markdown file, which is a supported format for Knowledge base uploads.
 
 ## Task 2: Upload the runbook to the Azure SRE Agent Knowledge base
+
 In this task, you will add the runbook as long-term knowledge for the agent. Files uploaded to the Knowledge base are indexed so the agent can search and reference them in future conversations.
 
-1. In your browser, go to <https://sre.azure.com>.
+1. In your browser, navigate to <https://sre.azure.com>
 
 2. Select the Azure SRE Agent that you created or verified in Exercise 1.
 
-3. Confirm that you are working in the lab subscription <inject key="SubscriptionID"></inject> and tenant <inject key="TenantID"></inject>.
+     ![](./../media/run-09.png)
 
-4. In the left navigation, select **Builder**.
+4. From the left navigation pane, select **Builder (1)**, then choose **Knowledge sources (2)**. Click **Add knowledge source (3)** to proceed.
 
-5. Select **Knowledge base**.
+   ![](./../media/run-05.png)
 
-   > [!Tip]
-   > Some portal builds may label the same area as **Knowledge sources** or **Knowledge settings**. Use the page under **Builder** that lets you add files, view source names, and see indexing status.
+6. In the **Add file** pane, click **browse for files**.
 
-6. Select **Add file**.
+   ![](./../media/run-06.png)
 
-7. In the file picker, browse to **C:\LabFiles\Runbooks**.
+7. In the file picker, navigate to **C:\LabFiles\Runbooks**. Select **appservice-http-500-triage.md (1)**, and then click **Open (2)**.
 
-8. Select **appservice-http-500-triage.md**.
+    ![](./../media/run-07.png)
 
-9. Select **Open**, and then select **Add file** or **Upload** if the portal asks for confirmation.
+1. Verify the file is present under **File Name (1)**, and click **Add file (2)**.
 
-10. Verify that **appservice-http-500-triage.md** appears in the knowledge source list.
-
-> [!Important]
-> For this exercise, upload the runbook through the Knowledge base rather than attaching it to a single chat message. A chat attachment is useful for one conversation, but a Knowledge base upload persists at the agent level and is searchable in future chats.
+    ![](./../media/run-08.png)
 
 ## Task 3: Verify indexing and knowledge inventory
 In this task, you will wait for the file to become searchable and then ask the agent what operational procedures it has available.
 
-1. On the **Knowledge base** page, locate **appservice-http-500-triage.md**.
+1. On the **Knowledge sources (1)** pane, locate **appservice-http-500-triage.md (2)**.
+
+    ![](./../media/run-10.png)
 
 2. Wait until the file status shows **Indexed** or a comparable ready state.
 
-   > [!Note]
-   > Microsoft Learn describes indexing as usually quick. If the status remains **Pending**, wait 1 to 2 minutes and refresh the page. If the status changes to **Not indexed**, upload the file again and confirm that you selected the Markdown file from **C:\LabFiles\Runbooks**.
+   ![](./../media/run-11.png)
+
+   >**Note**: Microsoft describes indexing as usually quick. If the status remains **Pending**, wait 1 to 2 minutes and refresh the page. If the status changes to **Not indexed**, upload the file again and confirm that you selected the Markdown file from **C:\LabFiles\Runbooks**.
 
 3. Start a new chat with the agent, or return to the main chat area.
+
+   ![](./../media/run-12.png)
 
 4. Ask the agent the following knowledge inventory prompt:
 
@@ -90,7 +105,11 @@ In this task, you will wait for the file to become searchable and then ask the a
    What runbooks or procedures do you have in your knowledge base?
    ```
 
+   ![](./../media/run-13.png)
+
 5. Review the response and confirm that it references **appservice-http-500-triage.md** or describes an App Service HTTP 500 triage procedure.
+
+   ![](./../media/run-14.png)
 
 6. If the answer does not mention the uploaded runbook, ask a more specific follow-up:
 
@@ -98,10 +117,9 @@ In this task, you will wait for the file to become searchable and then ask the a
    Search your knowledge base for the App Service HTTP 500 triage runbook. What procedure did you find?
    ```
 
-7. Confirm that the response includes at least one runbook-specific detail, such as **HTTP 500**, **Application Insights**, **KQL**, **App Service diagnostics**, or **escalation**.
+   ![](./../media/run-15.png)
 
-> [!Tip]
-> Good evidence includes a visible **Sources** section or citation link showing the uploaded runbook file name. If sources are available, open the citation to confirm it points to the runbook content.
+7. Confirm that the response includes at least one runbook-specific detail, such as **HTTP 500**, **Application Insights**, **KQL**, **App Service diagnostics**, or **escalation**.
 
 ## Task 4: Compare generic and runbook-grounded incident responses
 In this task, you will compare a general troubleshooting answer with a runbook-grounded incident response. This helps you verify that uploaded operational knowledge changes the quality and specificity of the agent's answer.
@@ -112,32 +130,32 @@ In this task, you will compare a general troubleshooting answer with a runbook-g
    What are common causes of HTTP 500 errors in Azure App Service?
    ```
 
+   ![](./../media/run-16.png)
+
 2. Read the response. It may include general causes such as application exceptions, dependency failures, configuration issues, deployment regressions, or platform health checks.
 
 3. Now ask the runbook-grounded incident triage prompt:
 
    ```text
-   The web app is returning intermittent HTTP 500 errors. Use the uploaded runbook and the Azure resources you can access to recommend first checks and escalation criteria.
+   Suppose the web app is returning intermittent HTTP 500 errors. Use the uploaded runbook and the Azure resources you can access to recommend first checks and escalation criteria.
    ```
 
-4. Compare the second response with the broad answer. The runbook-grounded response should be more specific to this lab and should include guidance similar to the prepared runbook, such as:
+   ![](./../media/run-17.png)
 
-   - Checking the lab App Service and its diagnostics blade.
-   - Reviewing Application Insights failed requests, exceptions, dependencies, and traces.
-   - Using KQL examples or KQL-style investigation steps.
-   - Looking for dependency failures, recent changes, or repeated exception patterns.
-   - Applying escalation criteria rather than treating every HTTP 500 as the same severity.
 
 5. If the response is still too generic, ask the agent to explicitly cite the uploaded runbook:
 
    ```text
-   Answer again, but cite the uploaded App Service HTTP 500 triage runbook and separate runbook guidance from general Azure guidance.
+   Suppose: We just resolved an incident involving intermittent HTTP 500 errors on the web app. Using the uploaded runbook and the diagnostic data available from Application Insights and Log Analytics for the incident window, draft a post-incident summary covering:
+
+   Timeline — when the errors started, spiked, and resolved Root cause — what the telemetry indicates, mapped to the runbook's diagnostic checks Detection — how/when the issue was first identified Escalation — whether runbook escalation criteria were met, and if the response followed them Follow-up actions — recommended fixes or runbook updates to prevent recurrence
    ```
 
-6. Review the grounded response and identify which parts came from the runbook versus general Azure troubleshooting knowledge. You will use this response as the starting point for the checklist refinement in the next task.
+   ![](./../media/run-18.png)
 
-> [!Note]
-> The lab workload resources are deployed in the resource group for deployment <inject key="DeploymentID" enableCopy="false"></inject>. If the agent cannot discuss the workload resources, return to Exercise 1 and confirm that the agent has access to the workload resource group before continuing.
+6. Review the grounded response to examine the findings and investigation details provided by the Agent.
+
+   >**Note**: The response may vary each time the prompt is submitted.
 
 ## Task 5: Refine the knowledge-grounded response
 In this task, you will turn the runbook-grounded triage answer into an actionable incident checklist for the App Service HTTP 500 scenario. The goal is to practice steering the agent from a helpful explanation toward a response format that an on-call SRE could follow during an active incident.
@@ -147,6 +165,8 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
    ```text
    Turn your runbook-grounded HTTP 500 triage answer into an actionable checklist for the on-call SRE. Keep it specific to the lab App Service incident and include what to check, where to check it, and what signal would trigger escalation.
    ```
+
+    ![](./../media/run-19.png)
 
 2. Review the checklist for operational structure. A useful checklist should be ordered, concise, and action oriented. Confirm that it includes items such as:
 
@@ -162,6 +182,8 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
    Revise the checklist so it explicitly cites the uploaded App Service HTTP 500 triage runbook and marks which checklist items came from that runbook.
    ```
 
+    ![](./../media/run-20.png)
+
 4. Confirm that the refined checklist includes at least two Azure operational signals from the scenario. Acceptable signals include:
 
    - **Application Insights** failed requests, exceptions, dependencies, traces, or transaction search.
@@ -176,11 +198,15 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
    Add decision points to the checklist. For each step, include the signal to look for and the next action if that signal is present.
    ```
 
+   ![](./../media/run-21.png)
+
 6. Optionally, ask the agent to critique the runbook for gaps that would make the next HTTP 500 incident easier to handle:
 
    ```text
    Based on the checklist you created, what details are missing from the uploaded runbook that our team should add before the next incident?
    ```
+   
+   ![](./../media/run-22.png)
 
 7. Review the suggested improvements. Useful suggestions might include adding owner contacts, dependency names, exact KQL queries, severity definitions, rollback criteria, or links to dashboards.
 
