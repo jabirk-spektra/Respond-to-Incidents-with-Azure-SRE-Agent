@@ -210,9 +210,6 @@ In this task, you will turn the runbook-grounded triage answer into an actionabl
 
 7. Review the suggested improvements. Useful suggestions might include adding owner contacts, dependency names, exact KQL queries, severity definitions, rollback criteria, or links to dashboards.
 
-> [!Tip]
-> Strong incident checklists combine team-specific runbook guidance with live Azure signals. If the response only gives generic advice, continue prompting the agent to use **appservice-http-500-triage.md** and to name the Azure signal that supports each action.
-
 ## 🧾 Summary
 You uploaded the App Service HTTP 500 triage runbook to Azure SRE Agent, waited for indexing, and verified that the agent could discover and use the runbook in chat. You also compared generic troubleshooting guidance with a runbook-grounded incident response and refined that response into an actionable checklist for the lab's intermittent HTTP 500 incident scenario. The agent is now configured to use team operational knowledge when responding to the lab workload.
 
